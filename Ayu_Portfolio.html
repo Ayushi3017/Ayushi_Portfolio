@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Portfolio Preview | Ayushi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Reset & Global Styles --- */
+        :root {
+            --bg-color: #121212;
+            --text-color: #EAEAEA;
+            --accent-color: #00BFFF;
+            --secondary-text-color: #888888;
+            --card-bg-color: rgba(30, 30, 30, 0.6);
+            --card-border-color: rgba(110, 31, 31, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: white;
+        }
+        
+        /* --- Hero Section --- */
+        .hero h1,
+.hero p,
+.hero a {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 1s ease-out forwards;
+}
+
+.hero p {
+  animation-delay: 0.3s;
+}
+.hero a {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem); /* Responsive font size */
+        }
+
+        .hero .title-line {
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+            animation: grow-line 1s 0.5s ease-out forwards;
+            transform: scaleX(0);
+        }
+
+        @keyframes grow-line {
+            to { transform: scaleX(1); }
+        }
+
+        .hero h3 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: var(--secondary-text-color);
+            max-width: 600px;
+        }
+        
+        .hero .cta-button {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 12px 24px;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-container {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 30px; /* spacing between buttons */
+           margin-top: 30px;
+}
+
+.custom-btn {
+  padding: 12px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.custom-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+        
+        .hero .cta-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: flex;
+            flex-wrap:wrap;
+            align-items: center;
+            gap: 10rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            color: #fff;
+            max-width: 600px;
+        }
+        
+        .about-image {
+            flex: 1;
+            max-width: 250px;
+            height: 250px;
+            background-color: var(--secondary-text-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--bg-color);
+            box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); /* For Safari */
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card p {
+            color: var(--secondary-text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tags span {
+            background-color: rgba(0, 191, 255, 0.1);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* --- Skills Section --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .skill-item {
+            background-color: #222;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: var(--secondary-text-color);
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid var(--card-border-color);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: var(--secondary-text-color);
+        }
+        
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--card-border-color);
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+        
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+        
+        .social-icons a {
+            margin: 0 0.75rem;
+        }
+        
+        .social-icons svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--secondary-text-color);
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-icons a:hover svg {
+            fill: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            h2 { font-size: 2rem; }
+            section { padding: 4rem 1.5rem; }
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        .section {
+  margin-top: 3rem;
+  padding: 0 2rem;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1e90ff;
+  text-align: center;
+}
+
+.cert-list {
+  list-style: none;
+  padding-left: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.cert-list li {
+  margin-bottom: 0.5rem;
+}
+
+.cert-list i {
+  color: #0077b6;
+  margin-right: 0.5rem;
+}
+
+.education-entry {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.education-entry h3,
+.education-entry p {
+  margin: 0.3rem 0;
+}
+
+.education-entry i {
+  color: #0077b6;
+  margin-right: 0.5rem;
+}
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+.hero {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+    </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+</head>
+<body>
+
+    <main>
+        <div id="particles-js"></div>
+        <section class="hero" id="hero">
+            <h1>Ayushi</h1>
+            <div class="title-line"></div>
+            <h3.5>|Data Science & Analytics| |2nd Year Student|</h3.5>
+            <h6>|currently based in Bengaluru|</h6>
+            <div class="btn-container">
+            <a href="#about" class="btn">About Me</a>
+            <a href="#education" class="btn">Education</a>
+            <a href="#skills" class="btn">Skills</a>
+            <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="https://avatars.githubusercontent.com/u/186175927?s=400&u=e152bbdf6cc84f015d83cce27a7f037e4ac095b9&v=4" alt="Your Headshot" />
+                </div>
+                <div class="about-text">
+                    <h2 style="text-align: left; margin-bottom: 1rem;">About Me</h2>
+                    <p>
+                        Hello Everyone, I'm Ayushi an aspiring data scientist with a keen interest in data analytics, machine learning, and transforming raw data into meaningful insights. Eager to learn and continuously building my skills in Python programming, data visualization, and research to solve real-world problems through data-driven approaches. I value collaboration and team building, and my attention to detail helps ensure accuracy and clarity in my work. I look forward to contributing to impactful projects in the data science space.<br><br>
+                        My core philosophy is centered around clean code, user-centric design, and continuous learning. Let's connect and build something amazing together.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>My Work</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>Accenture-nordics-Virtual-Simulation</h4>
+                        I completed the Accenture Nordics virtual job simulation, where I worked with an app Digital Health and analyzed client data to uncover opportunities for digital transformation, conducted market research and stakeholder analysis, and proposed a cloud-based solution tailored to client needs. The experience involved developing actionable insights and aligning business objectives with innovative tech strategies to drive sustainable growth.<div class="project-tags">
+                        <span>Cloud Architecture</span><span>Security</span><span>Architecture Design</span>
+                    </div>
+                    <div class="project-links">
+                       <a href="https://github.com/Ayushi3017/accenture-nordics-forage-simulation" target="_blank">View Repo</a>
+                    </div>
+                
+                </div>
+                <div class="project-card">
+                    <h4>JP-Morgan-Virtual-Simulation </h4>
+                    <p>I completed the J.P. Morgan virtual job simulation, where I worked on analyzing stock price data using Python to identify investment trends and insights. The experience involved data cleaning, visualization, and using technical indicators to support decision-making. I also communicated findings through a concise email to a hypothetical client, showcasing both analytical and professional communication skills.</p>
+                    <div class="project-tags">
+                        <span>Python</span><span>Data Visualization</span><span>Data Cleaning and analysis</span>
+                    </div>
+                    <div class="project-links">
+                       <a href="https://github.com/Ayushi3017/accenture-nordics-forage-simulation" target="_blank">View Repo</a>
+                    </div></div>              
+                <div class="project-card">
+                    <h4>My Portfolio</h4>
+                    <p>I designed and developed my personal portfolio website from scratch using HTML and CSS, focusing on a clean dark theme with subtle animations and responsiveness. Every section—from hero to projects and contact—is crafted to highlight both aesthetics and usability. This project reflects my hands-on approach to learning, experimenting with design, and showcasing my skills in an interactive way.</p>
+                    <div class="project-tags">
+                        <span>HTML5</span><span>CSS</span><span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills & Tech: </h2>
+            <div class="skills-container">
+                <div class="skill-item">Python</div>
+                <div class="skill-item">R</div>
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">CSS</div>
+                <div class="skill-item">HTML5</div>
+                <div class="skill-item">PostgreSQL</div>
+                <div class="skill-item">Data Visualization</div>
+                <div class="skill-item">React</div>
+                <div class="skill-item">Git and GitHub</div>
+            </div>
+        </section>
+    <section id="certifications" class="section">
+        <h2><i class="fas fa-certificate"></i> Certifications</h2>
+    <ul class="cert-list">
+       <a href="https://example.com/jp-morgan-certificate" target="_blank" rel="noopener noreferrer"></a>
+       <li>J.P. Morgan Virtual Experience – Forage</li>
+       <a href="https://example.com/Accenture-Nordics-certificate" target="_blank" rel="noopener noreferrer"></a>
+       <li>Accenture Nordics Consulting Simulation – Forage</li>
+       <a href="https://example.com/Deloitte-certificate" target="_blank" rel="noopener noreferrer"></a>
+       <li>Deloitte Data Analytics – Forage</li>
+       <a href="https://example.com/Commonwealth-Bank-certificate" target="_blank" rel="noopener noreferrer"></a>
+       <li> Commonwealth Bank Virtual Simulation – Forage</li>
+       <a href="https://example.com/udemy-certificate" target="_blank" rel="noopener noreferrer"></a>
+       <li>JavaScript Mastery – Udemy</li>
+    </ul>
+    </section>
+
+<section id="education" class="section">
+  <h2> <i class="fas fa-user-graduate"></i> Education</h2>
+  <div class="education-entry">
+    <h3>B.sc(Hons.) in Data Sciences and Analytics</h3>
+    <p>M.S. Ramaiah University of Applied Sciences(Bengaluru) – 2024 to 2028</p>
+    <p>Relevant Coursework: Python, AI, Machine Learning(LLMs), Statistics, Data Visualizations and Analytics</p>
+  </div>
+   <div class="education-entry">
+    <h3>Schooling:</h3>
+    <p>D.A.V. public School(Ranchi)– 2015 to 2024</p>
+    <p>GRADE- 10th : 9.8 CGPA <br> 12th: 8.32 CGPA</p>
+    <p>D.P.S. International Kampala- 2009 to 2015 </p>
+    <p>GRADE- 10 CGPA</p>
+  </div>
+</section>
+
+
+        <section id="contact">
+            <h2>Let's Connect!</h2>
+            <p>Have a project in mind, or just want to say hello? My inbox is always open. I'm currently available for interships, learning and freelance opportunities and would love to hear about your vision and guidance.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/ayushi-sinha-b2a885329/" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/Ayushi3017" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+        © 2025 Ayushi.[27-07-2025]
+    </footer>
+
+    <script>
+        // Simple script to add 'visible' class to sections on scroll for fade-in animation
+        const sections = document.querySelectorAll('section');
+
+        const options = {
+            root: null, // relative to the viewport
+            threshold: 0.1, // 10% of the item must be visible
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+```
