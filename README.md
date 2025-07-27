@@ -1,2 +1,2 @@
 # Ayushi_Portfolio
- I designed and developed my personal portfolio website from scratch using HTML and CSS, focusing on a clean dark theme with subtle animations and responsiveness. Every section—from hero to projects and contact—is crafted to highlight both aesthetics and usability. This project reflects my hands-on approach to learning &amp; experimenting with design.
+ I designed and developed my personal portfolio website from scratch using HTML and CSS, focusing on a clean dark theme with subtle animations and responsiveness. Every section—from hero to projects and contact—is crafted to highlight both aesthetics and usability. This project reflects my hands-on approach to learning , experimenting with design and showcasing my skills in an interactive way.
